@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Off the Shelf — E-Learning Repository (PLM CN Style)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+   :root {
+    --gold: #f1d687ff;
+    --maroon: #8A0808;
+    --green: #2e6f4a;
+    --bg: #fbfbfb;
+    --card: #ffffff;
+    --muted: #59606a;
+    --maxw: 1200px;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: #0f1724;
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: linear-gradient(90deg, #2e6f4a 40%, #f1d687ff 100%);
+    color: white;
+    padding: 18px 24px;
+    box-shadow: 0 5px 18px rgba(10, 10, 10, 0.15);
+  }
+  .site-header .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .brand img {
+    height: 67px;
+    width: 67px;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 6;
+  }
+  .brand h1 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--gold);
+  }
+  .brand p {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  nav {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  nav a:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* ===== Hero ===== */
+  .hero{max-width:var(--maxw); margin:18px auto;}
+  .hero .banner{
+    flex:1; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border-radius:12px; padding:30px; display:flex; gap:14px; align-items:center;  box-shadow:0 6px 20px 10px rgba(0,0,0,0.10);
+  }
+  .banner img{width:100px; height:100px; object-fit:cover; border-radius:8px; flex-shrink:0; border:2px solid rgba(255,255,255,0.06)}
+  .banner .text h2{margin:0; color:var(--green); font-size:20px}
+  .banner .text p{margin:6px 0 0; color:var(--muted); font-size:14px}
+
+  /* ===== Layout ===== */
+  main {
+  max-width: var(--maxw);
+  margin: 12px auto 0px;
+  display: grid;
+  grid-template-columns: 1fr; /* make main content single column so card takes full width */
+  gap: 18px;
+  padding: 0 12px;
+}
+
+#repoCard {
+  background: var(--card);
+  border-radius: 12px;
+  border-top: 6px solid var(--green);
+  padding: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
+}
+#repoCard #previewArea img,
+#repoCard #previewArea iframe,
+#repoCard #previewArea video,
+#repoCard #previewArea pre {
+  width: 100%;
+  max-width: 100%;
+}
+  .card h3{margin:0 0 8px 0; color:var(--green)}
+  label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+input[type="text"], input[type="file"], select, textarea{
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6; font-size:14px; background: #fff;
+}
+.controls{display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap}
+  .controls input[type="search"]{flex:1; padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6}
+  .filters {
+  display: flex;      /* align items in a row */
+  gap: 12px;          /* space between selects and buttons */
+  align-items: center; /* vertically center the items */}
+  .filters select{padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6}
+  .file-list{display:flex; flex-direction:column; gap:10px}
+  .file-card{display:flex; gap:12px; align-items:flex-start; padding:12px; border-radius:10px; background:linear-gradient(180deg,#ffffff,#fbfbfb); border:1px solid #eee}
+  .file-thumb{width:76px; height:64px; background:#fafafa; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:28px; color:var(--muted); flex-shrink:0; border:1px solid #f0f0f0}
+  .file-info{flex:1}
+  .file-info h4{margin:0; color:var(--green); font-size:15px}
+  .meta{font-size:13px; color:var(--muted); margin-top:6px}
+  .file-actions{display:flex; gap:8px; align-items:center}
+  .pill{padding:6px 10px; border-radius:999px; background:#2e6f4a; border:1px solid #2e6f4a; font-weight:700; color:white; font-size:13px}
+  .small{font-size:12px}
+
+  label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+  input[type="text"], input[type="file"], select, textarea{
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6; font-size:14px; background: #fff;
+  }
+
+  textarea{min-height:88px; resize:vertical}
+
+  .row{display:flex; gap:8px}
+  .row .col{flex:1}
+
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px; border:0; cursor:pointer; font-weight:700}
+  .btn-primary{background:var(--gold); color:var(--green); box-shadow: 0 6px 12px rgba(242,201,76,0.12)}
+  .btn-secondary{background:var(--green); color:white}
+  .btn-danger{background:#ff6b6b; color:white}
+
+  .muted{color:var(--muted); font-size:13px}
+
+  .progress-wrap{margin-top:8px}
+  .progress-track{height:8px; background:#f1f1f1; border-radius:999px; overflow:hidden}
+  .progress-bar{height:100%; width:0; background:linear-gradient(90deg,var(--green),var(--green)); transition:width 250ms ease}
+
+  .tag {
+  font-size: 12px;
+  color: var(--muted);
+  margin-right: 4px;
+}
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--green);
+    margin: 0;
+    padding: 18px 24px;
+    box-shadow: 0 6px 20px rgba(10, 10, 10, 0.04);
+    border-top: 6px solid var(--gold);
+    color: white;
+  }
+  .site-footer .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .site-footer .brandline {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .site-footer img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  }
+  .modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 4000; /* higher than expanded card */
+}
+
+.modal .panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+  max-width: 95vw;
+  max-height: 95vh;
+  overflow: auto;
+}
+
+  /* small screens */
+  @media (max-width:640px){
+    .brand p{display:none}
+    .hero{padding:12px}
+    .file-thumb{width:56px;height:46px;font-size:22px}
+  }
+/* ===== Button Hover Effects ===== */
+.btn:hover,
+.pill:hover {
+  filter: brightness(1.1); /* slightly brighter */
+  transform: translateY(-1px); /* slight lift */
+  transition: all 0.2s ease;
+}
+
+/* Delete button hover */
+.pill.btn-delete:hover {
+  background: #ff7b7b; /* bright red */
+  border-color: #ff7b7b;
+  color: white;
+  cursor: pointer;
+  /* include brightness & lift effect */
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+ 
+/* Other pill hover */
+.pill:not(.btn-delete):hover {
+  background: #277d49; /* green */
+  cursor: pointer;
+}
+
+ /* Loader Overlay */
+    #loader {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: url("plm-campus.jpg") no-repeat center center/cover;
+      z-index: 9999;
+    }
+
+    /* Tint Overlay for loader */
+    #loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 83, 45, 0.40); 
+    }
+
+    .loader-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .loader-container img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .ring {
+      position: absolute;
+      border: 1.5px solid green;
+      border-radius: 50%;
+      border-top-color: transparent;
+      border-left-color: transparent;
+    }
+
+    .ring:nth-child(2) {
+      width: 115px;
+      height: 115px;
+      border-color: gold;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      animation: spin 2s linear infinite;
+    }
+
+    .ring:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      animation: spin 3s linear infinite;
+    }
+
+    .ring:nth-child(4) {
+      width: 130px;
+      height: 130px;
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body data-page="dashboard">
+  <!-- HEADER -->
+<header class="site-header">
+  <div class="inner">
+    <div class="brand">
+      <img src="cnlogo.png" alt="PLM CN Logo"/>
+      <div>
+        <h1>Off the Shelf — First Semester Course</h1>
+        <p>Pamantasan ng Lungsod ng Maynila, College of Nursing</p>
+      </div>
+    </div>
+
+      <nav role="navigation" aria-label="Main navigation">
+         <a href="student_dashboard.php">Home</a>
+         <a href="Repository.html">Repository</a>
+         <a href="Intro.html">Log Out</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-hidden="false">
+    <div class="banner" role="region" aria-label="project banner">
+      <img src="TFN.png" alt="Banner placeholder">
+      <div class="text">
+        <h2>Theoretical Foundations in Nursing</h2>
+        <p class="muted">Course materials, lecture notes, and resources for Theoretical Foundations in Nursing.</p>
+        <div style="height:8px"></div>
+        <div style="display:flex; gap:8px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main role="main" aria-label="main content">
+  <!-- RIGHT: Repository list & preview -->
+  <section class="card" id="repoCard" aria-labelledby="repo-title">
+    <h3>Resources</h3>
+
+    <div class="controls" role="region" aria-label="controls">
+      <input type="search" id="search" placeholder="Search title" aria-label="search resources">
+     <div class="filters" style="margin-left:auto;">
+  <select id="filterType"><option value="">All Types</option>
+          <option>Lecture Notes</option>
+          <option>Nursing Care Plan (NCP)</option>
+          <option>Return Demonstration</option>
+          <option>Video</option>
+          <option>Other</option>
+  </select>
+  <input type="file" id="importFile" accept=".json" style="display:none">
+</div>
+    </div>
+
+    <div id="listWrap">
+      <div id="fileList" class="file-list" aria-live="polite" aria-label="file list">
+        <div class="muted small">No resources found.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div class="brandline">
+      <img src="cnlogo.png" alt="PLM CN Logo" />
+      <div>
+         <div style="font-weight:600; color:var(--gold); font-size: 16px">Pamantasan ng Lungsod ng Maynila</div>
+        <div style="font-size: 12px;">College of Nursing — Off the Shelf Project</div>
+      </div>
+    </div>
+    <div style= "font-size: 12px;">Prototype version — created by PLM Nursing Developers</div>
+  </div>
+</footer>
+
+<!-- Full-screen View Modal -->
+<div id="viewModal" class="modal" role="dialog" aria-modal="true" aria-label="File preview">
+  <div class="panel" style="position:relative; max-height:90vh; overflow:auto;">
+    <button id="exitViewBtn" class="btn btn-danger" style="position:absolute; top:12px; right:12px; color:#ffffff">✖</button>
+    <div id="viewContent" style="text-align:center;"></div>
+  </div>
+</div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-container">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <img src="cnlogo.png" alt="Loading" />
+  </div>
+</div>
+
+<script>
+const DB_NAME = 'plm_erepo_v1';
+const STORE = 'resources';
+let db;
+
+const $ = id => document.getElementById(id);
+
+function openDB() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open(DB_NAME, 1);
+    r.onupgradeneeded = e => {
+      const idb = e.target.result;
+      if (!idb.objectStoreNames.contains(STORE)) {
+        const os = idb.createObjectStore(STORE, { keyPath: 'id', autoIncrement: true });
+        os.createIndex('title', 'title', { unique: false });
+      }
+    };
+    r.onsuccess = e => { db = e.target.result; res(db); };
+    r.onerror = e => rej(e.target.error);
+  });
+}
+
+(async function init() {
+  await openDB();
+  $('search')?.addEventListener('input', refreshUI);
+  $('filterType')?.addEventListener('change', refreshUI);
+  await refreshUI();
+})();
+
+function getAll() {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(STORE, 'readonly');
+    const req = tx.objectStore(STORE).getAll();
+    req.onsuccess = () => res(req.result);
+    req.onerror = e => rej(e.target.error);
+  });
+}
+
+async function refreshUI() {
+  const items = await getAll();
+  renderList(items);
+}
+
+function renderList(items) {
+  const container = $('fileList');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const q = $('search')?.value.trim().toLowerCase() || '';
+  const type = $('filterType')?.value || '';
+
+  // ✅ Filter only Theoretical Foundations in Nursing course + reviewed items
+  const filtered = items.filter(it => {
+    const matchCourse = it.course === "Theoretical Foundations in Nursing";
+    const matchReviewed = it.reviewed === true;
+    const matchType = !type || it.type === type;
+    const matchSearch = !q || [it.title, it.filename, (it.tags || []).join(' ')].join(' ').toLowerCase().includes(q);
+    return matchCourse && matchReviewed && matchType && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="muted small">No resources found for Theoretical Foundations in Nursing.</div>`;
+    return;
+  }
+
+  for (const it of filtered) {
+    const el = document.createElement('div');
+    el.className = 'file-card';
+
+    const thumb = document.createElement('div');
+    thumb.className = 'file-thumb';
+    thumb.textContent = fileIconForMime(it.mime, it.filename);
+
+    const info = document.createElement('div');
+    info.className = 'file-info';
+    const title = document.createElement('h4');
+    title.textContent = it.title;
+
+    const meta = document.createElement('div');
+    meta.className = 'meta small muted';
+    meta.innerHTML = `${it.filename} • ${humanSize(it.size)} • ${it.type}<br>
+      Uploaded: ${new Date(it.uploadedAt).toLocaleString()} 
+      <span style="color:green;font-weight:700">• Reviewed</span>`;
+
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+
+    const btnView = document.createElement('button');
+    btnView.className = 'pill';
+    btnView.textContent = 'View';
+    btnView.onclick = () => previewResource(it.id);
+
+    const btnDL = document.createElement('button');
+    btnDL.className = 'pill';
+    btnDL.textContent = 'Download';
+    btnDL.onclick = () => downloadResource(it.id);
+
+    actions.append(btnView, btnDL);
+    info.append(title, meta);
+    el.append(thumb, info, actions);
+    container.appendChild(el);
+  }
+}
+
+/* Helpers */
+function fileIconForMime(mime, filename) {
+  if (!mime) mime = '';
+  mime = mime.toLowerCase();
+  if (mime.includes('pdf') || filename.endsWith('.pdf')) return '📄';
+  if (mime.startsWith('image/') || filename.match(/\.(png|jpe?g|gif|bmp|webp)$/i)) return '🖼️';
+  if (mime.startsWith('video/') || filename.match(/\.(mp4|webm|ogg|mov)$/i)) return '🎥';
+  if (filename.match(/\.(docx?|rtf|odt)$/i)) return '📝';
+  if (filename.match(/\.(pptx?|odp)$/i)) return '📽️';
+  if (filename.match(/\.(xlsx?|csv)$/i)) return '📊';
+  return '📁';
+}
+
+function humanSize(bytes) {
+  if (!bytes) return '';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+/* Download + Preview */
+function getById(id) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(STORE, 'readonly');
+    const req = tx.objectStore(STORE).get(id);
+    req.onsuccess = () => res(req.result);
+    req.onerror = e => rej(e.target.error);
+  });
+}
+
+async function downloadResource(id) {
+  const rec = await getById(id);
+  if (!rec) return alert('Not found');
+  const a = document.createElement('a');
+  a.href = rec.data;
+  a.download = rec.filename || 'resource';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+async function previewResource(id) {
+  const rec = await getById(id);
+  if (!rec) return alert('Not found');
+  const modal = document.getElementById('viewModal');
+  const content = document.getElementById('viewContent');
+  content.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.innerHTML = `<strong style="color:var(--green)">${rec.title}</strong> — <span class="muted small">${rec.filename} • ${humanSize(rec.size)}</span>`;
+  head.style.marginBottom = '12px';
+  content.appendChild(head);
+
+  const lower = (rec.filename || '').toLowerCase();
+
+  if (rec.mime.startsWith('image/') || lower.match(/\.(png|jpe?g|gif|webp)$/i)) {
+    const img = document.createElement('img');
+    img.src = rec.data;
+    img.style.maxWidth = '90vw';
+    img.style.maxHeight = '80vh';
+    img.style.objectFit = 'contain';
+    content.appendChild(img);
+  } else if (rec.mime === 'application/pdf' || lower.endsWith('.pdf')) {
+    const iframe = document.createElement('iframe');
+    iframe.src = rec.data;
+    iframe.style.width = '90vw';
+    iframe.style.height = '80vh';
+    content.appendChild(iframe);
+  } else {
+    content.innerHTML += `<div class="muted small">Preview not available for this file type.</div>`;
+  }
+
+  modal.style.display = 'flex';
+  document.getElementById('exitViewBtn').onclick = () => (modal.style.display = 'none');
+}
+
+/* Loader for navigation */
+function startLoading(targetPage) {
+  const loader = document.getElementById("loader");
+  loader.style.display = "flex";
+  setTimeout(() => { window.location.href = targetPage; }, 3000);
+}
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const target = link.getAttribute("href");
+    startLoading(target);
+  });
+});
+</script>
+</body>
+</html>

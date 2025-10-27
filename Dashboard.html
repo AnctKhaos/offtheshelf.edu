@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Off the Shelf — E-Learning Repository (PLM CN Style)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+   :root {
+    --gold: #F2C94C;
+    --maroon: #8A0808;
+    --green: #2e6f4a;
+    --bg: #fbfbfb;
+    --card: #ffffff;
+    --muted: #59606a;
+    --maxw: 1200px;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: #0f1724;
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: linear-gradient(90deg, #2e6f4a 40%, #f1d687ff 100%);
+    color: white;
+    padding: 18px 24px;
+    box-shadow: 0 5px 18px rgba(10, 10, 10, 0.15);
+  }
+  .site-header .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .brand img {
+    height: 67px;
+    width: 67px;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 6;
+  }
+  .brand h1 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--gold);
+  }
+  .brand p {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  nav {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  nav a:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* ===== Hero ===== */
+  .hero{max-width:var(--maxw); margin:18px auto;}
+  .hero .banner{
+    flex:1; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    border-radius:12px; padding:18px; display:flex; gap:14px; align-items:center;  box-shadow:0 6px 20px 10px rgba(0,0,0,0.10);
+  }
+  .banner img{width:170px; height:170px; object-fit:cover; border-radius:8px; flex-shrink:0; border:2px solid rgba(255,255,255,0.06)}
+  .banner .text h2{margin:0; color:var(--green); font-size:20px}
+  .banner .text p{margin:6px 0 0; color:var(--muted); font-size:14px}
+
+  /* ===== Layout ===== */
+  main {
+  max-width: var(--maxw);
+  margin: 12px auto 0px;
+  display: grid;
+  grid-template-columns: 1fr; /* make main content single column so card takes full width */
+  gap: 18px;
+  padding: 0 12px;
+}
+
+#repoCard {
+  background: var(--card);
+  border-radius: 12px;
+  border-top: 6px solid var(--green);
+  padding: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
+}
+#repoCard #previewArea img,
+#repoCard #previewArea iframe,
+#repoCard #previewArea video,
+#repoCard #previewArea pre {
+  width: 100%;
+  max-width: 100%;
+}
+  .card h3{margin:0 0 8px 0; color:var(--green)}
+  label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+input[type="text"], input[type="file"], select, textarea{
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6; font-size:14px; background: #fff;
+}
+.controls{display:flex; gap:8px; align-items:center; margin-bottom:12px; flex-wrap:wrap}
+  .controls input[type="search"]{flex:1; padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6}
+  .filters {
+  display: flex;      /* align items in a row */
+  gap: 12px;          /* space between selects and buttons */
+  align-items: center; /* vertically center the items */}
+  .filters select{padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6}
+  .file-list{display:flex; flex-direction:column; gap:10px}
+  .file-card{display:flex; gap:12px; align-items:flex-start; padding:12px; border-radius:10px; background:linear-gradient(180deg,#ffffff,#fbfbfb); border:1px solid #eee}
+  .file-thumb{width:76px; height:64px; background:#fafafa; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:28px; color:var(--muted); flex-shrink:0; border:1px solid #f0f0f0}
+  .file-info{flex:1}
+  .file-info h4{margin:0; color:var(--green); font-size:15px}
+  .meta{font-size:13px; color:var(--muted); margin-top:6px}
+  .file-actions{display:flex; gap:8px; align-items:center}
+  .pill{padding:6px 10px; border-radius:999px; background:#2e6f4a; border:1px solid #2e6f4a; font-weight:700; color:white; font-size:13px}
+  .small{font-size:12px}
+
+  label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+  input[type="text"], input[type="file"], select, textarea{
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid #e6e6e6; font-size:14px; background: #fff;
+  }
+
+  textarea{min-height:88px; resize:vertical}
+
+  .row{display:flex; gap:8px}
+  .row .col{flex:1}
+
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px; border:0; cursor:pointer; font-weight:700}
+  .btn-primary{background:var(--gold); color:var(--green); box-shadow: 0 6px 12px rgba(242,201,76,0.12)}
+  .btn-secondary{background:var(--green); color:white}
+  .btn-danger{background:#ff6b6b; color:white}
+
+  .muted{color:var(--muted); font-size:13px}
+
+  .progress-wrap{margin-top:8px}
+  .progress-track{height:8px; background:#f1f1f1; border-radius:999px; overflow:hidden}
+  .progress-bar{height:100%; width:0; background:linear-gradient(90deg,var(--green),var(--green)); transition:width 250ms ease}
+
+  .tag {
+  font-size: 12px;
+  color: var(--muted);
+  margin-right: 4px;
+}
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--green);
+    margin: 0;
+    padding: 18px 24px;
+    box-shadow: 0 6px 20px rgba(10, 10, 10, 0.04);
+    border-top: 6px solid var(--gold);
+    color: white;
+
+  }
+  .site-footer .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .site-footer .brandline {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .site-footer img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 4000; /* higher than expanded card */
+}
+
+.modal .panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+  max-width: 95vw;
+  max-height: 95vh;
+  overflow: auto;
+}
+
+  /* small screens */
+  @media (max-width:640px){
+    .brand p{display:none}
+    .hero{padding:12px}
+    .file-thumb{width:56px;height:46px;font-size:22px}
+  }
+/* ===== Button Hover Effects ===== */
+.btn:hover,
+.pill:hover {
+  filter: brightness(1.1); /* slightly brighter */
+  transform: translateY(-1px); /* slight lift */
+  transition: all 0.2s ease;
+}
+
+/* Delete button hover */
+.pill.btn-delete:hover {
+  background: #ff7b7b; /* bright red */
+  border-color: #ff7b7b;
+  color: white;
+  cursor: pointer;
+  /* include brightness & lift effect */
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+ 
+/* Other pill hover */
+.pill:not(.btn-delete):hover {
+  background: #277d49; /* green */
+  cursor: pointer;
+}
+
+ /* Loader Overlay */
+    #loader {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: url("plm-campus.jpg") no-repeat center center/cover;
+      z-index: 9999;
+    }
+
+    /* Tint Overlay for loader */
+    #loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 83, 45, 0.40); 
+    }
+
+    .loader-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .loader-container img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .ring {
+      position: absolute;
+      border: 1.5px solid green;
+      border-radius: 50%;
+      border-top-color: transparent;
+      border-left-color: transparent;
+    }
+
+    .ring:nth-child(2) {
+      width: 115px;
+      height: 115px;
+      border-color: gold;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      animation: spin 2s linear infinite;
+    }
+
+    .ring:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      animation: spin 3s linear infinite;
+    }
+
+    .ring:nth-child(4) {
+      width: 130px;
+      height: 130px;
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+<body data-page="dashboard">
+  <!-- HEADER -->
+<header class="site-header">
+  <div class="inner">
+    <div class="brand">
+      <img src="cnlogo.png" alt="PLM CN Logo"/>
+      <div>
+        <h1>Off the Shelf — Admin Dashboard</h1>
+        <p>Pamantasan ng Lungsod ng Maynila, College of Nursing</p>
+      </div>
+    </div>
+
+      <nav role="navigation" aria-label="Main navigation">
+        <a href="intro.html">Log Out</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-hidden="false">
+    <div class="banner" role="region" aria-label="project banner">
+      <img src="profile.jpg" alt="Banner placeholder">
+      <div class="text">
+        <h2>Welcome, Dear Admin!</h2>
+        <p class="muted">Review and browse repository uploads.</p>
+        <div style="height:8px"></div>
+        <div style="display:flex; gap:8px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main role="main" aria-label="main content">
+  <!-- RIGHT: Repository list & preview -->
+  <section class="card" id="repoCard" aria-labelledby="repo-title">
+    <h3>Review of Pending Uploads</h3>
+
+    <div class="controls" role="region" aria-label="controls">
+      <input type="search" id="search" placeholder="Search title" aria-label="search resources">
+     <div class="filters" style="margin-left:auto;">
+  <select id="filterCourse"><option value="">All Courses</option></select>
+  <select id="filterStatus">
+    <option value="">All Status</option>
+    <option value="approved">Approved</option>
+    <option value="pending">Pending</option>
+  </select>
+  <input type="file" id="importFile" accept=".json" style="display:none">
+</div>
+    </div>
+
+    <div id="listWrap">
+      <div id="fileList" class="file-list" aria-live="polite" aria-label="file list">
+        <div class="muted small">No resources found.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div class="brandline">
+      <img src="cnlogo.png" alt="PLM CN Logo" />
+      <div>
+        <div style="font-weight:600; color:var(--gold); font-size: 16px">Pamantasan ng Lungsod ng Maynila</div>
+        <div style="font-size: 12px;">College of Nursing — Off the Shelf Project</div>
+      </div>
+    </div>
+    <div style= "font-size: 12px;">Prototype version — created by PLM Nursing Developers</div>
+  </div>
+</footer>
+
+<!-- Full-screen View Modal -->
+<div id="viewModal" class="modal" role="dialog" aria-modal="true" aria-label="File preview">
+  <div class="panel" style="position:relative; max-height:90vh; overflow:auto;">
+    <button id="exitViewBtn" class="btn btn-danger" style="position:absolute; top:12px; right:12px; color:#ffffff">✖</button>
+    <div id="viewContent" style="text-align:center;"></div>
+  </div>
+</div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-container">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <img src="cnlogo.png" alt="Loading" />
+  </div>
+</div>
+
+<script>
+/* =========================
+   Repository + Dashboard JS
+   - Admin mode always active
+   - Pending uploads visible only in dashboard.html
+   - Reviewed files visible only in repository.html
+   - IndexedDB storage (100 MB limit)
+   ========================= */
+
+const DB_NAME = 'plm_erepo_v1';
+const STORE = 'resources';
+const MAX_SIZE = 100 * 1024 * 1024; // 100 MB
+let db;
+let adminMode = true; // always active
+
+const $ = id => document.getElementById(id);
+
+// Open DB
+function openDB() {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open(DB_NAME, 1);
+    r.onupgradeneeded = e => {
+      const idb = e.target.result;
+      if (!idb.objectStoreNames.contains(STORE)) {
+        const os = idb.createObjectStore(STORE, { keyPath: 'id', autoIncrement: true });
+        os.createIndex('title', 'title', { unique: false });
+        os.createIndex('course', 'course', { unique: false });
+        os.createIndex('tags', 'tags', { unique: false, multiEntry: true });
+      }
+    };
+    r.onsuccess = e => { db = e.target.result; res(db); };
+    r.onerror = e => rej(e.target.error);
+  });
+}
+
+/* initialize */
+(async function init() {
+  await openDB();
+  wireEvents();
+  await refreshUI();
+})();
+
+/* UI Events */
+function wireEvents() {
+  $('uploadForm')?.addEventListener('submit', handleUpload);
+  $('search')?.addEventListener('input', refreshUI);
+ $('filterCourse')?.addEventListener('change', refreshUI);
+$('filterStatus')?.addEventListener('change', refreshUI);
+  $('importFile')?.addEventListener('change', handleImport);
+}
+
+/* Upload */
+async function handleUpload(evt) {
+  evt.preventDefault();
+  const fileEl = $('file');
+  const file = fileEl.files[0];
+  if (!file) return alert('Choose a file to upload.');
+  if (file.size > MAX_SIZE && !confirm('File is larger than 100MB. Continue?')) return;
+
+  const title = $('title').value.trim();
+  const course = $('course').value;
+  const year = $('year').value;
+  const type = $('type').value;
+  const tags = $('tags').value.split(',').map(s => s.trim()).filter(Boolean);
+  const desc = $('desc').value.trim();
+  const consentChk = $('consentChk').checked;
+
+  if (!title || !course || !year || !type)
+    return alert('Please fill required fields (title, course, year, type).');
+  if (!consentChk && !confirm('Consent checkbox is unchecked. Proceed?')) return;
+
+  const reader = new FileReader();
+  reader.onprogress = e => {
+    if (e.lengthComputable) {
+      const pct = Math.round(e.loaded / e.total * 100);
+      $('progressBar').style.width = pct + '%';
+    }
+  };
+  reader.onload = async () => {
+    const dataUrl = reader.result;
+    const rec = {
+      title, course, year, type, tags, desc,
+      filename: file.name, mime: file.type || 'application/octet-stream',
+      size: file.size, data: dataUrl,
+      uploadedAt: new Date().toISOString(),
+      reviewed: false // pending by default
+    };
+    try {
+      const tx = db.transaction(STORE, 'readwrite');
+      tx.objectStore(STORE).add(rec);
+      tx.oncomplete = () => {
+        clearForm();
+        refreshUI();
+        $('progressBar').style.width = '0%';
+        alert('File uploaded and pending approval.');
+      };
+    } catch (err) {
+      console.error(err);
+      alert('Upload failed: ' + err);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+/* Clear Form */
+function clearForm() {
+  $('uploadForm')?.reset();
+  $('progressBar').style.width = '0%';
+}
+
+/* Get all records */
+function getAll() {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(STORE, 'readonly');
+    const req = tx.objectStore(STORE).getAll();
+    req.onsuccess = () => res(req.result);
+    req.onerror = e => rej(e.target.error);
+  });
+}
+
+/* Refresh UI */
+async function refreshUI() {
+  const items = await getAll();
+  populateFilters(items);
+  renderList(items);
+}
+
+/* Populate filters */
+function populateFilters(items) {
+  const courseSet = new Set(['']);
+  const yearSet = new Set(['']);
+  const tagSet = new Set(['']);
+  items.forEach(i => {
+    if (i.course) courseSet.add(i.course);
+    if (i.year) yearSet.add(i.year);
+    if (Array.isArray(i.tags)) i.tags.forEach(t => tagSet.add(t));
+  });
+
+  const fill = (elId, set) => {
+    const sel = $(elId);
+    if (!sel) return;
+    const cur = sel.value;
+    sel.innerHTML = '';
+    for (const v of set) {
+      const opt = document.createElement('option');
+      opt.value = v;
+      opt.textContent = v ? v : (elId === 'filterTag' ? 'All Tags' : (elId === 'filterCourse' ? 'All Courses' : 'All'));
+
+      sel.appendChild(opt);
+    }
+    if ([...set].includes(cur)) sel.value = cur;
+  };
+
+  fill('filterCourse', courseSet);
+  fill('filterTag', tagSet);
+}
+
+/* Render filtered list */
+function renderList(items) {
+  const container = $('fileList');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const page = document.body.dataset.page || 'repository';
+  const filtered = items
+    .filter(it => page === 'dashboard' ? true : it.reviewed) // show all in dashboard, only approved in repository
+    .filter(matchesFilter);
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="muted small">No resources found.</div>`;
+    $('previewArea').innerHTML = 'Select a resource to preview here.';
+    return;
+  }
+
+  for (const it of filtered) {
+  const el = document.createElement('div');
+  el.className = 'file-card';
+
+  const thumb = document.createElement('div');
+  thumb.className = 'file-thumb';
+  thumb.textContent = fileIconForMime(it.mime, it.filename);
+
+  const info = document.createElement('div');
+  info.className = 'file-info';
+
+  const title = document.createElement('h4');
+  title.textContent = it.title;
+
+  const meta = document.createElement('div');
+  meta.className = 'meta small muted';
+  meta.innerHTML = `${it.filename} • ${humanSize(it.size)} • ${it.course} • Semester ${it.semester} • ${it.type}<br>
+    Uploaded: ${new Date(it.uploadedAt).toLocaleString()} 
+    ${it.reviewed 
+      ? '<span style="color:green;font-weight:700">• Reviewed</span>' 
+      : '<span style="color:orange;font-weight:700">• Pending Approval</span>'}`;
+
+  const tagLine = document.createElement('div');
+  tagLine.style.marginTop = '8px';
+ if (it.tags && it.tags.length) {
+  const tagText = it.tags.join(', ');
+  const s = document.createElement('span');
+  s.className = 'tag';
+  s.textContent = tagText;
+  tagLine.appendChild(s);
+  }
+
+  const actions = document.createElement('div');
+  actions.className = 'file-actions';
+
+  // View button (always visible)
+  const btnView = document.createElement('button');
+  btnView.className = 'pill';
+  btnView.textContent = 'View';
+  btnView.onclick = () => previewResource(it.id);
+  actions.appendChild(btnView);
+
+  // Show different buttons depending on approval status
+  if (!it.reviewed) {
+    // Pending approval: Approve + Delete
+    const btnApprove = document.createElement('button');
+    btnApprove.className = 'pill';
+    btnApprove.textContent = 'Approve';
+    btnApprove.onclick = () => approveResource(it.id);
+    actions.appendChild(btnApprove);
+  } else {
+    // Approved: Download + Delete
+    const btnDL = document.createElement('button');
+    btnDL.className = 'pill';
+    btnDL.textContent = 'Download';
+    btnDL.onclick = () => downloadResource(it.id);
+    actions.appendChild(btnDL);
+  }
+
+  // Delete button (always visible on dashboard)
+  if (page === 'dashboard') {
+    const btnDelete = document.createElement('button');
+    btnDelete.className = 'pill btn-delete';
+    btnDelete.textContent = 'Delete';
+    btnDelete.onclick = () => deleteResource(it.id);
+    actions.appendChild(btnDelete);
+  }
+
+  info.append(title, meta, tagLine);
+  el.append(thumb, info, actions);
+  container.appendChild(el);
+}
+}
+
+/* Search & filter */
+function matchesFilter(item) {
+  const q = $('search')?.value.trim().toLowerCase() || '';
+  const fc = $('filterCourse')?.value;
+  const fstatus = $('filterStatus')?.value;
+
+  // Filter by course
+  if (fc && item.course !== fc) return false;
+
+  // Filter by approval status
+  if (fstatus) {
+    if (fstatus === 'approved' && !item.reviewed) return false;
+    if (fstatus === 'pending' && item.reviewed) return false;
+  }
+
+  // Filter by search query
+  if (q) {
+    const hay = [item.title, item.desc, item.filename, item.course]
+      .join(' ')
+      .toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+
+  return true;
+}
+
+/* Icons + sizes */
+function fileIconForMime(mime, filename) {
+  if (!mime) mime = '';
+  mime = mime.toLowerCase();
+  if (mime.includes('pdf') || filename.endsWith('.pdf')) return '📄';
+  if (mime.startsWith('image/') || filename.match(/\.(png|jpe?g|gif|bmp|webp)$/i)) return '🖼️';
+  if (mime.startsWith('video/') || filename.match(/\.(mp4|webm|ogg|mov)$/i)) return '🎥';
+  if (filename.match(/\.(docx?|rtf|odt)$/i)) return '📝';
+  if (filename.match(/\.(xlsx?|csv)$/i)) return '📊';
+  return '📁';
+}
+
+function humanSize(bytes) {
+  if (!bytes) return '';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+/* Preview, Download, Approve, Delete */
+async function previewResource(id) {
+  const rec = await getById(id);
+  if (!rec) return alert('Resource not found.');
+
+  const modal = document.getElementById('viewModal');
+  const content = document.getElementById('viewContent');
+  const exitBtn = document.getElementById('exitViewBtn');
+
+  // Clear previous content
+  content.innerHTML = '';
+
+  // File title & info
+  const head = document.createElement('div');
+  head.innerHTML = `<strong style="color:var(--green)">${rec.title}</strong> — <span class="muted small">${rec.filename} • ${humanSize(rec.size)}</span>`;
+  head.style.marginBottom = '12px';
+  content.appendChild(head);
+
+  const lower = (rec.filename || '').toLowerCase();
+
+  if (rec.mime.startsWith('image/') || lower.match(/\.(png|jpe?g|gif|webp)$/i)) {
+    const img = document.createElement('img');
+    img.src = rec.data;
+    img.style.maxWidth = '90vw';
+    img.style.maxHeight = '80vh';
+    img.style.objectFit = 'contain';
+    content.appendChild(img);
+  } else if (rec.mime === 'application/pdf' || lower.endsWith('.pdf')) {
+    const iframe = document.createElement('iframe');
+    iframe.src = rec.data;
+    iframe.style.width = '90vw';
+    iframe.style.height = '80vh';
+    content.appendChild(iframe)
+  }
+    else {
+    content.innerHTML += `<div class="muted small">Preview not available for this file type.</div>`;
+  }
+
+  // Show modal
+  modal.style.display = 'flex';
+
+  // Exit button
+  exitBtn.onclick = () => {
+    modal.style.display = 'none';
+  };
+}
+
+function getById(id) {
+  return new Promise((res, rej) => {
+    const tx = db.transaction(STORE, 'readonly');
+    const req = tx.objectStore(STORE).get(id);
+    req.onsuccess = () => res(req.result);
+    req.onerror = e => rej(e.target.error);
+  });
+}
+
+async function downloadResource(id) {
+  const rec = await getById(id);
+  if (!rec) return alert('Not found');
+  const a = document.createElement('a');
+  a.href = rec.data;
+  a.download = rec.filename || 'resource';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+async function approveResource(id) {
+  const rec = await getById(id);
+  if (!rec) return;
+  rec.reviewed = true;
+  const tx = db.transaction(STORE, 'readwrite');
+  tx.objectStore(STORE).put(rec);
+  tx.oncomplete = refreshUI;
+}
+
+function deleteResource(id) {
+  if (!confirm('Delete this file?')) return;
+  const tx = db.transaction(STORE, 'readwrite');
+  tx.objectStore(STORE).delete(id);
+  tx.oncomplete = refreshUI;
+}
+
+/* Import/Export */
+async function exportBackup() {
+  const items = await getAll();
+  const blob = new Blob([JSON.stringify(items)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'erepo-backup.json';
+  a.click();
+}
+
+function handleImport(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = async () => {
+    try {
+      const arr = JSON.parse(r.result);
+      const tx = db.transaction(STORE, 'readwrite');
+      const os = tx.objectStore(STORE);
+      for (const it of arr) os.add(it);
+      tx.oncomplete = () => { alert('Import complete'); refreshUI(); };
+    } catch (err) { alert('Invalid backup file'); }
+  };
+  r.readAsText(f);
+}
+
+/* Loader for navigation */
+function startLoading(targetPage) {
+  const loader = document.getElementById("loader");
+  loader.style.display = "flex";
+  setTimeout(() => { window.location.href = targetPage; }, 3000);
+}
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const target = link.getAttribute("href");
+    startLoading(target);
+  });
+});
+</script>
+</body>
+</html>

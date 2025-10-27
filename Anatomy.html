@@ -1,0 +1,446 @@
+<?php include 'protect_student.php'; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anatomy and Physiology</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --gold: #f1d687ff;
+      --maroon: #8A0808;
+      --green: #2e6f4a;
+      --bg: #fbfbfb;
+      --card: #ffffff;
+      --muted: #59606a;
+      --maxw: 1200px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #0f1724;
+      line-height: 1.6;
+    }
+
+    .site-header {
+      background: linear-gradient(90deg, var(--green) 40%, #f1d687ff 100%);
+      color: white;
+      padding: 18px 24px;
+      box-shadow: 0 5px 18px rgba(10, 10, 10, 0.15);
+    }
+    .site-header .inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .brand img {
+      height: 56px;
+      width: 56px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px;
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--gold);
+    }
+    .brand p {
+      margin: 0;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    main {
+      max-width: var(--maxw);
+      margin: 24px auto 80px;
+      padding: 0 12px;
+    }
+
+    .page-title {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .page-title h2 {
+      margin: 0 0 8px 0;
+      color: var(--green);
+      font-size: 1.8em;
+    }
+
+    .page-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+
+    .file-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      min-height: 400px;
+    }
+
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .file-item {
+      background: var(--bg);
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .file-item:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .file-icon {
+      font-size: 2em;
+      text-align: center;
+    }
+
+    .file-name {
+      font-weight: 600;
+      color: var(--green);
+      font-size: 0.9em;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    .file-info {
+      font-size: 0.75em;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    .empty-state-icon {
+      font-size: 4em;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      color: var(--green);
+      margin: 0 0 8px 0;
+    }
+
+    .empty-state p {
+      margin: 0;
+    }
+
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--green);
+    margin: 0;
+    padding: 18px 24px;
+    box-shadow: 0 6px 20px rgba(10, 10, 10, 0.04);
+    border-top: 6px solid var(--gold);
+    color: white;
+  }
+  .site-footer .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .site-footer .brandline {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .site-footer img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("plm-campus.jpg") no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    #loader::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(20, 83, 45, 0.40); 
+      z-index: -1;
+    }
+    .loader-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loader-container img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+    .ring {
+      position: absolute;
+      border: 1.5px solid green;
+      border-radius: 50%;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+    .ring:nth-child(2) {
+      width: 115px;
+      height: 115px;
+      border-color: gold;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      animation-duration: 2s;
+    }
+    .ring:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      animation-duration: 3s;
+    }
+    .ring:nth-child(4) {
+      width: 130px;
+      height: 130px;
+      animation-duration: 4s;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="loader">
+    <div class="loader-container">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <img src="cnlogo.png" alt="PLM Logo">
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="inner">
+      <div class="brand">
+        <img src="cnlogo.png" alt="PLM Logo">
+        <div>
+          <h1>Anatomy & Physiology</h1>
+          <p>Pamantasan ng Lungsod ng Maynila, College of Nursing</p>
+        </div>
+      </div>
+      <nav>
+        <a href="student_dashboard.php">Home</a>
+        <a href="Repository.html">Repository</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-title">
+      <h2>Anatomy & Physiology Resources</h2>
+      <p>Course materials, lecture notes, and study resources for Anatomy and Physiology</p>
+    </div>
+
+    <div class="file-container">
+      <div id="fileBox">
+        <div class="empty-state">
+          <div class="empty-state-icon">📂</div>
+          <h3>No Files Yet</h3>
+          <p>Files uploaded with the "Anatomy & Physiology" tag will appear here.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<footer class="site-footer">
+  <div class="inner">
+    <div class="brandline">
+      <img src="cnlogo.png" alt="PLM CN Logo" />
+      <div>
+         <div style="font-weight:600; color:var(--gold); font-size: 16px">Pamantasan ng Lungsod ng Maynila</div>
+        <div style="font-size: 12px;">College of Nursing — Off the Shelf Project</div>
+      </div>
+    </div>
+    <div style= "font-size: 12px;">Prototype version — created by PLM Nursing Developers</div>
+  </div>
+</footer>
+
+  <script src="javascript.js"></script>
+  <script>
+    window.addEventListener("load", function() {
+      document.getElementById("loader").style.display = "none";
+    });
+
+    const DB_NAME = 'plm_erepo_v1';
+    const STORE = 'resources';
+    let db;
+
+    function openDB(){
+      return new Promise((res, rej)=>{
+        const r = indexedDB.open(DB_NAME, 1);
+        r.onsuccess = e => { db = e.target.result; res(db); };
+        r.onerror = e => rej(e.target.error);
+      });
+    }
+
+    async function getAll(){
+      return new Promise((res,rej)=>{
+        const tx = db.transaction(STORE,'readonly');
+        const os = tx.objectStore(STORE);
+        const req = os.getAll();
+        req.onsuccess = ()=> res(req.result);
+        req.onerror = e=> rej(e.target.error);
+      });
+    }
+
+    async function loadCourseFiles() {
+      try {
+        await openDB();
+        const allFiles = await getAll();
+        
+        const courseFiles = allFiles.filter(f => 
+          f.reviewed && 
+          (f.course === "Anatomy & Physiology" || 
+           f.course === "Anatomy and Physiology" ||
+           f.course === "Anaphy" ||
+           (Array.isArray(f.tags) && f.tags.some(tag => 
+             tag.toLowerCase().includes('anatomy') || 
+             tag.toLowerCase().includes('physiology') ||
+             tag.toLowerCase().includes('anaphy')
+           )))
+        );
+
+        const fileBox = document.getElementById("fileBox");
+        
+        if(courseFiles.length > 0) {
+          fileBox.innerHTML = '<div class="file-grid"></div>';
+          const grid = fileBox.querySelector('.file-grid');
+          
+          courseFiles.forEach(file => {
+            const item = document.createElement("div");
+            item.className = "file-item";
+            
+            let icon = "📄";
+            if(file.type === "video") icon = "🎥";
+            else if(file.type === "lecture") icon = "📝";
+            else if(file.type === "care-plan") icon = "📋";
+            else if(file.type === "demo") icon = "🎬";
+            
+            item.innerHTML = `
+              <div class="file-icon">${icon}</div>
+              <div class="file-name">${file.title}</div>
+              <div class="file-info">${file.type || 'Document'}</div>
+            `;
+            
+            item.onclick = () => {
+              if(file.data) {
+                const link = document.createElement('a');
+                link.href = file.data;
+                link.download = file.filename;
+                link.click();
+              }
+            };
+            
+            grid.appendChild(item);
+          });
+        }
+      } catch(err) {
+        console.error('Error loading files:', err);
+      }
+    }
+
+    loadCourseFiles();
+
+    function startLoading(targetPage) {
+      const loader = document.getElementById("loader");
+      loader.style.display = "flex";
+      setTimeout(() => {
+        window.location.href = targetPage;
+      }, 3000);
+    }
+
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = this.getAttribute("href");
+        startLoading(target);
+      });
+    });
+  </script>
+
+  <script src="session_timer.js"></script>
+
+</body>
+</html>

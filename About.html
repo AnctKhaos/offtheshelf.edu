@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>About — Off the Shelf</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --gold: #f1d687ff;
+    --maroon: #8A0808;
+    --green: #2e6f4a;
+    --bg: #fbfbfb;
+    --card: #ffffff;
+    --muted: #59606a;
+    --maxw: 1200px;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: #0f1724;
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: linear-gradient(90deg, #2e6f4a 40%, #f1d687ff 100%);
+    color: white;
+    padding: 18px 24px;
+    box-shadow: 0 5px 18px rgba(10, 10, 10, 0.15);
+  }
+  .site-header .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .brand img {
+    height: 67px;
+    width: 67px;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 6px;
+  }
+  .brand h1 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--gold);
+  }
+  .brand p {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  nav {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+ nav a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+  /* ===== VIDEO SECTION ===== */
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .video-container video {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+  }
+ .overlay-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  color: white;
+  text-align: left;
+  padding: 20px 40px;
+  pointer-events: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  box-sizing: border-box;
+}
+
+.overlay-text img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 1;
+  transition: all 0.3s ease;
+}
+
+.overlay-text .text-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  margin-right: 60px; /* keeps text away from right edge */
+  transition: margin 0.3s ease;
+}
+
+.overlay-text h2 {
+  font-size: 32px;
+  color: var(--gold);
+  margin: 0 0 10px 0;
+}
+
+.overlay-text p {
+  color: #f0e68c;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .overlay-text .text-content {
+    margin-right: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay-text {
+    flex-direction: column;
+    align-items: center; /* center everything */
+    justify-content: center;
+    padding: 100px 20px 20px; /* add top padding so image doesn't touch header */
+    gap: 14px;
+    text-align: center;
+  }
+
+  .overlay-text img {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 10px;
+  }
+
+  .overlay-text .text-content {
+    margin-right: 0;
+  }
+
+  .overlay-text h2 {
+    font-size: 24px;
+  }
+
+  .overlay-text p {
+    font-size: 14px;
+    margin: 0 20px; /* add space on both sides of text */
+  }
+}
+
+@media (max-width: 480px) {
+  .overlay-text {
+    padding: 120px 15px 20px; /* more top padding for very small screens */
+  }
+
+  .overlay-text img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .overlay-text p {
+    margin: 0 10px;
+    font-size: 13px;
+  }
+}
+
+ /* ===== ABOUT LAYOUT ===== */
+.about-layout {
+  max-width: var(--maxw);
+  margin: 24px auto;
+  padding: 0 12px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto; /* Mission/Vision row + Team row */
+  gap: 16px;
+  align-items: stretch; /* Makes mission and vision cards equal height */
+  text-align: justify;
+}
+
+/* Top row: Mission and Vision equal size */
+.mission-card,
+.vision-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Bottom row: Team card spans across both columns */
+.team-card {
+  grid-column: span 2;
+}
+
+/* ===== CARD STYLE ===== */
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(10, 10, 10, 0.05);
+  border-top: 6px solid var(--green);
+  position: relative;
+  height: 100%; /* Ensures cards align evenly */
+  box-sizing: border-box;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card p {
+  margin: 6px 0;
+  color: #0f1724;
+  flex-grow: 1; /* Makes text stretch evenly */
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .about-layout {
+    grid-template-columns: 1fr; /* Stack all cards vertically */
+  }
+  .team-card {
+    grid-column: span 1;
+  }
+}
+.team-label {
+  font-size: 16px;
+  color: var(--green);
+  margin-bottom: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.member {
+  flex: 0 0 auto;
+  width: 150px; /* slightly smaller */
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.10);
+}
+
+.member img {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold);
+}
+  .member h5 {
+    margin: 15px 0 0;
+    color: var(--green);
+  }
+  .member p {
+    margin: 0;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ===== TEAM MEMBERS HORIZONTAL SCROLL (Hidden scrollbar) ===== */
+.team-members {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 10px;
+  scrollbar-width: none; /* Firefox - hide scrollbar */
+  -ms-overflow-style: none; /* IE and Edge - hide scrollbar */
+}
+
+.team-members::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge - hide scrollbar */
+}
+
+  /* ===== FOOTER ===== */
+  .site-footer {
+    background: var(--green);
+    margin: 0;
+    padding: 18px 24px;
+    box-shadow: 0 6px 20px rgba(10, 10, 10, 0.04);
+    border-top: 6px solid var(--gold);
+    color: white;
+  }
+  .site-footer .inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .site-footer .brandline {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .site-footer img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  /* Loader Overlay */
+    #loader {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: url("plm-campus.jpg") no-repeat center center/cover;
+      z-index: 9999;
+    }
+
+    /* Tint Overlay for loader */
+    #loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 83, 45, 0.40); 
+    }
+
+    .loader-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .loader-container img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .ring {
+      position: absolute;
+      border: 1.5px solid green;
+      border-radius: 50%;
+      border-top-color: transparent;
+      border-left-color: transparent;
+    }
+
+    .ring:nth-child(2) {
+      width: 115px;
+      height: 115px;
+      border-color: gold;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      animation: spin 2s linear infinite;
+    }
+
+    .ring:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      animation: spin 3s linear infinite;
+    }
+
+    .ring:nth-child(4) {
+      width: 130px;
+      height: 130px;
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <div class="brand">
+      <img src="cnlogo.png" alt="PLM CN Logo"/>
+      <div>
+        <h1>Off the Shelf — About</h1>
+        <p>Pamantasan ng Lungsod ng Maynila, College of Nursing</p>
+      </div>
+    </div>
+    <nav>
+      <a href="intro.html">Return</a>
+    </nav>
+  </div>
+</header>
+
+<section class="video-container">
+  <video autoplay loop muted playsinline>
+    <source src="Video display 2.mov" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <section class="overlay-text">
+    <img src="logo-only.png" alt="Logo"/>
+    <div>
+      <h2>About Off the Shelf</h2>
+      <p>
+        Off the Shelf is a digital repository of first-year nursing students in Pamantasan ng Lungsod ng Maynila. It serves as a collection of demonstration videos, lecture lessons and case studies covering subjects in first-year nursing curriculum.
+      </p>
+    </div>
+  </section>
+</section>
+
+<main class="about-layout">
+  <div class="mission-card card">
+    <h3>Mission</h3>
+    <p>
+      To provide first-year nursing students easily accessible, comprehensive, and well-structured learning materials that help them establish an excellent foundation for their nursing education by serving as a guide for lesson study, return demonstration preparation, and case study evaluation.
+    </p>
+  </div>
+
+  <div class="vision-card card">
+    <h3>Vision</h3>
+    <p>
+      To be a reliable and innovative center that helps nursing students succeed academically, develop clinical competence, and build confidence as they build careers as knowledgeable and compassionate healthcare professionals.
+    </p>
+  </div>
+
+  <div class="team-card card">
+    <h3>Meet the Team</h3>
+    <p>
+      We are a group of dedicated nursing students who collaborated to create this Repository Website as part of our Nursing Informatics research project. Our shared goal is to make nursing resources more accessible, well-organized, and user-friendly for both students and professionals. By working together, we combined our skills, knowledge, and creativity to design a platform that supports learning, encourages collaboration, and promotes excellence in nursing education.
+    </p>
+
+  <h4 class="team-label">Prototype Committee</h4>
+  <div class="team-members">
+    <div class="member">
+      <img src="cnlogo.png" alt="Espinas" />
+      <h5>Edwin Espinas</h5>
+      <p>Lead Programmer</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Quines" />
+      <h5>Nicole Quines</h5>
+      <p>Assistant Programmer</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Quinquito" />
+      <h5>Carylle Quinquito</h5>
+      <p>Assistant Programmer</p>
+    </div>
+     <div class="member">
+      <img src="cnlogo.png" alt="Sevilla" />
+      <h5>Kurt Sevilla</h5>
+      <p>Assistant Programmer</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Sojuaco" />
+      <h5>Maria Sojuaco</h5>
+      <p>Assistant Programmer</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Magat" />
+      <h5>Jeremia Magat</h5>
+      <p>Content Curator</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Torrecampo" />
+      <h5>Miguel Torrecampo</h5>
+      <p>Content Curator</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Pahati" />
+      <h5>Piolo Pahati</h5>
+      <p>Database Manager</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Dela" />
+      <h5>Marydesiree Dela</h5>
+      <p>UI/UX Designer</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Gaborni" />
+      <h5>Jehan Gaborni</h5>
+      <p>UI/UX Designer</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Huang" />
+      <h5>Regine Huang</h5>
+      <p>UI/UX Designer</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Quintao" />
+      <h5>Jade Quintao</h5>
+      <p>QA & Documentation Officer</p>
+    </div>
+  </div>
+
+  <h4 class="team-label">Paper Committee</h4>
+  <div class="team-members">
+    <div class="member">
+      <img src="cnlogo.png" alt="Batuto" />
+      <h5>Darrell Batuto</h5>
+    <p>Lead Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Baez" />
+      <h5>Reese Baez</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Balabagan" />
+      <h5>Norhana Balabagan</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Bermudez" />
+      <h5>Francois Bermudez</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Cabildo" />
+      <h5>Arj Cabildo</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Cea" />
+      <h5>Khyra Cea</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Goyena" />
+      <h5>Saira Goyena</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Ingalla" />
+      <h5>Erika Ingalla</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Joson" />
+      <h5>Marriya Joson</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Ladines" />
+      <h5>Alexis Ladines</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Leyva" />
+      <h5>Chrissa Leyva</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Manalastas" />
+      <h5>Sergio Manalastas</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Matibag" />
+      <h5>Jaztine Matibag</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Necio" />
+      <h5>Trisha Necio</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Rodriguez" />
+      <h5>Angelica Rodriguez</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Serdeña" />
+      <h5>Shaira Serdeña</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Sunico" />
+      <h5>Deidre Sunico</h5>
+      <p>Researcher</p>
+    </div>
+    <div class="member">
+      <img src="cnlogo.png" alt="Villanueva" />
+      <h5>Mikhaela Villanueva</h5>
+      <p>Researcher</p>
+    </div>
+  </div>
+</div>
+</main>
+
+
+<footer class="site-footer">
+  <div class="inner">
+    <div class="brandline">
+      <img src="cnlogo.png" alt="PLM CN Logo" />
+      <div>
+         <div style="font-weight:600; color:var(--gold); font-size: 16px">Pamantasan ng Lungsod ng Maynila</div>
+        <div style="font-size: 12px;">College of Nursing — Off the Shelf Project</div>
+      </div>
+    </div>
+    <div style= "font-size: 12px;">Prototype version — created by PLM Nursing Developers</div>
+  </div>
+</footer>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-container">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <img src="cnlogo.png" alt="Loading" />
+  </div>
+</div>
+
+<script>
+  // Toggle the team grid only
+  document.querySelectorAll(".toggle-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".team-aside");
+      card.classList.toggle("expanded");
+      btn.textContent = card.classList.contains("expanded") ?  "▲" : "▼";
+    });
+  });
+// Allow mouse wheel horizontal scrolling for hidden scrollbars
+document.querySelectorAll('.team-members').forEach(container => {
+  container.addEventListener('wheel', (e) => {
+    if (e.deltaY !== 0) {
+      e.preventDefault();
+      container.scrollLeft += e.deltaY; // scroll horizontally
+    }
+  });
+});
+
+  // Loader function
+  function startLoading(targetPage) {
+    const loader = document.getElementById("loader");
+    loader.style.display = "flex";
+    setTimeout(() => {
+      window.location.href = targetPage;
+    }, 3000);
+  }
+
+  // Apply loader to all nav links
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      const target = this.getAttribute("href");
+      startLoading(target);
+    });
+  });
+</script>
+</body>
+</html>
+
+
